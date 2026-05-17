@@ -5,8 +5,8 @@
 body {
   margin: 0;
   font-family: Arial, Helvetica, sans-serif;
-  color: #2f2a28;
-  background: #fff8f2;
+  color: #1f2f2f;
+  background: #eef7f6;
 }
 
 .hero {
@@ -15,9 +15,11 @@ body {
   background: #f2d7d5;
 }
 
-.hero h1 {
-  margin: 0;
-  font-size: 3rem;
+.hero {
+  text-align: center;
+  padding: 4rem 1.5rem;
+  background: linear-gradient(135deg, #78c2ad, #5b8fd1);
+  color: white;
 }
 
 .hero p {
@@ -48,7 +50,7 @@ main {
 }
 
 .card {
-  background: white;
+  background: #f8ffff;
   border-radius: 18px;
   overflow: hidden;
   box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
@@ -79,7 +81,7 @@ main {
 footer {
   text-align: center;
   padding: 2rem;
-  color: #6c5f5b;
+  color: #4b6b6b;
 }
 .item-images {
   display: grid;
