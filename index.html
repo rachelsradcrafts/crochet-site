@@ -97,12 +97,18 @@
       "images/fox/1.jpg",
       "images/fox/2.jpg",
       "images/fox/3.jpg"
+    ],
+
+    penguin: [
+      "images/penguin/1.jpg",
+      "images/penguin/2.jpg",
+      "images/penguin/3.jpg"
     ]
   };
 
   const galleryIndexes = {
-    fox: 0
-     penguin: 0
+    fox: 0,
+    penguin: 0
   };
 
   function moveSlide(galleryName, direction) {
@@ -118,9 +124,8 @@
       galleryIndexes[galleryName] = 0;
     }
 
-    document.getElementById(
-      galleryName + "-image"
-    ).src = images[galleryIndexes[galleryName]];
+    document.getElementById(galleryName + "-image").src =
+      images[galleryIndexes[galleryName]];
   }
 </script>
 </body>
