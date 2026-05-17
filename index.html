@@ -39,7 +39,7 @@
     <button class="nav next" onclick="moveSlide('fox', 1)">❯</button>
   </div>
 
-  <h3>Crochet Fox</h3>
+  <h3>Crochet Fox $25</h3>
 
   <p>
     Handmade crochet fox plush.
@@ -47,26 +47,26 @@
 
 </article>
 
-      <article class="card">
-  <div class="item-images">
-    <img src="images/fox/1.jpg" alt="Fox front view" />
-    <img src="images/fox/2.jpg" alt="Fox side view" />
-    <img src="images/fox/3.jpg" alt="Fox side view" />
+      
+<<article class="card">
+
+  <div class="carousel">
+    <button class="nav prev" onclick="moveSlide('penguin', -1)">❮</button>
+
+    <img
+      id="penguin-image"
+      src="images/penguin/1.jpg"
+      alt="Crochet Penguin"
+    />
+
+    <button class="nav next" onclick="moveSlide('penguin', 1)">❯</button>
   </div>
 
-  <h3>Fox $25</h3>
-  <p>Handmade crochet fox. Soft, cute, and made to order.</p>
-  
-</article>
-<article class="card">
-  <div class="item-images">
-    <img src="images/penguin/1.jpg" alt="Penguin front view" />
-    <img src="images/penguin/2.jpg" alt="Penguin with dog (Blu)" />
-    <img src="images/penguin/3.jpg" alt="Penguin side view" />
-  </div>
+  <h3>Crochet Penguin $15</h3>
 
-  <<h3>Penguin $15</h3>
-  <p>Handmade crochet penguin. Soft, cute, and made to order.</p>
+  <p>
+    Handmade crochet penguin plush.
+  </p>
 
 </article>
 
@@ -83,7 +83,7 @@
         Interested in an item or a custom order? Message me here:
       </p>
       <p class="contact-line">
-        Instagram / Facebook / Rachelsradgrafts@gmail.com
+        Instagram / Facebook / Rachelsradcrafts@gmail.com
       </p>
     </section>
   </main>
@@ -102,6 +102,7 @@
 
   const galleryIndexes = {
     fox: 0
+     penguin: 0
   };
 
   function moveSlide(galleryName, direction) {
