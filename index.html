@@ -26,10 +26,26 @@
 
     <section class="gallery">
       <article class="card">
-        <img src="images/item-1.jpg" alt="Crochet item" />
-        <h3>Example Item 1</h3>
-        <p>Short description goes here. Price or availability can go here too.</p>
-      </article>
+
+  <div class="carousel">
+    <button class="nav prev" onclick="moveSlide('fox', -1)">❮</button>
+
+    <img
+      id="fox-image"
+      src="images/fox/1.jpg"
+      alt="Crochet Fox"
+    />
+
+    <button class="nav next" onclick="moveSlide('fox', 1)">❯</button>
+  </div>
+
+  <h3>Crochet Fox</h3>
+
+  <p>
+    Handmade crochet fox plush.
+  </p>
+
+</article>
 
       <article class="card">
   <div class="item-images">
@@ -51,7 +67,7 @@
 
   <<h3>Penguin $15</h3>
   <p>Handmade crochet penguin. Soft, cute, and made to order.</p>
-  
+
 </article>
 
       <article class="card">
@@ -75,5 +91,36 @@
   <footer>
     <p>© 2026 Handmade Crochet</p>
   </footer>
+  <script>
+  const galleries = {
+    fox: [
+      "images/fox/1.jpg",
+      "images/fox/2.jpg",
+      "images/fox/3.jpg"
+    ]
+  };
+
+  const galleryIndexes = {
+    fox: 0
+  };
+
+  function moveSlide(galleryName, direction) {
+    const images = galleries[galleryName];
+
+    galleryIndexes[galleryName] += direction;
+
+    if (galleryIndexes[galleryName] < 0) {
+      galleryIndexes[galleryName] = images.length - 1;
+    }
+
+    if (galleryIndexes[galleryName] >= images.length) {
+      galleryIndexes[galleryName] = 0;
+    }
+
+    document.getElementById(
+      galleryName + "-image"
+    ).src = images[galleryIndexes[galleryName]];
+  }
+</script>
 </body>
 </html>
