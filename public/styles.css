@@ -43,10 +43,42 @@ main {
 
 .gallery {
   display: grid;
-
   grid-template-columns: repeat(4, 1fr);
-
   gap: 1.5rem;
+}
+
+@media (max-width: 1000px) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 750px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 500px) {
+  .gallery {
+    grid-template-columns: 1fr;
+  }
+
+  main {
+    padding: 1rem 0.75rem;
+  }
+
+  .hero {
+    padding: 2.5rem 1rem;
+  }
+
+  .hero h1 {
+    font-size: 2.2rem;
+  }
+
+  .carousel img {
+    height: 280px;
+  }
 }
 
 .card {
@@ -76,6 +108,7 @@ main {
 
 .contact-line {
   font-weight: bold;
+  
 }
 
 footer {
@@ -177,4 +210,7 @@ footer {
 }
 .contact {
   margin-top: 3rem;
+}
+.contact-line a {
+  word-break: break-word;
 }
