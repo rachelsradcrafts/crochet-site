@@ -37,6 +37,7 @@ function readPrice(folderPath) {
   }
 
   return "$" + price;
+ }
   function readDate(folderPath) {
   const dateFile = path.join(folderPath, "date.txt");
 
@@ -52,7 +53,7 @@ function readPrice(folderPath) {
 
   return date;
 }
-}
+
 
 const items = fs
   .readdirSync(imagesRoot, { withFileTypes: true })
