@@ -141,10 +141,11 @@ function sortedItems() {
   }
 
   if (sortValue === "newest") {
-  copy.sort((a, b) => b.newestImageTime - a.newestImageTime);
+  copy.sort((a, b) => b.sortDate.localeCompare(a.sortDate));
 }
-  if (sortValue === "oldest") {
-  copy.sort((a, b) => a.newestImageTime - b.newestImageTime);
+
+if (sortValue === "oldest") {
+  copy.sort((a, b) => a.sortDate.localeCompare(b.sortDate));
 }
   return copy;
 }

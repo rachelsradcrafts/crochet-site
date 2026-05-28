@@ -37,6 +37,21 @@ function readPrice(folderPath) {
   }
 
   return "$" + price;
+  function readDate(folderPath) {
+  const dateFile = path.join(folderPath, "date.txt");
+
+  if (!fs.existsSync(dateFile)) {
+    return "1900-01-01";
+  }
+
+  const date = fs.readFileSync(dateFile, "utf8").trim();
+
+  if (date.length === 0) {
+    return "1900-01-01";
+  }
+
+  return date;
+}
 }
 
 const items = fs
@@ -77,7 +92,7 @@ try {
   name: displayNameFromFolder(folder),
   folder,
   price: readPrice(folderPath),
-  newestImageTime,
+  sortDate: readDate(folderPath),
   images
 };
   })
