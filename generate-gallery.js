@@ -46,20 +46,30 @@ const items = fs
     const folder = entry.name;
     const folderPath = path.join(imagesRoot, folder);
 
-    const images = fs
-      .readdirSync(folderPath, { withFileTypes: true })
-      .filter(file => file.isFile())
-      .map(file => file.name)
-      .filter(fileName => allowedExtensions.has(path.extname(fileName).toLowerCase()))
-      .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+    const imageFiles = fs
+  .readdirSync(folderPath, { withFileTypes: true })
+  .filter(file => file.isFile())
+  .map(file => file.name)
+  .filter(fileName => allowedExtensions.has(path.extname(fileName).toLowerCase()));
 
-    return {
-      id: idFromFolder(folder),
-      name: displayNameFromFolder(folder),
-      folder,
-      price: readPrice(folderPath),
-      images
-    };
+const images = imageFiles
+  .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
+
+const newestImageTime = Math.max(
+  ...imageFiles.map(fileName => {
+    const filePath = path.join(folderPath, fileName);
+    return fs.statSync(filePath).mtimeMs;
+  })
+);
+
+   return {
+  id: idFromFolder(folder),
+  name: displayNameFromFolder(folder),
+  folder,
+  price: readPrice(folderPath),
+  newestImageTime,
+  images
+};
   })
   .filter(item => item.images.length > 0);
 

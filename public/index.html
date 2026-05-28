@@ -34,6 +34,7 @@
     <option value="price-low">Price: Low to High</option>
     <option value="price-high">Price: High to Low</option>
     <option value="newest">Newest to Oldest</option>
+    <option value="oldest">Oldest to Newest</option>
   </select>
 </section>
 
@@ -140,9 +141,11 @@ function sortedItems() {
   }
 
   if (sortValue === "newest") {
-    copy.reverse();
-  }
-
+  copy.sort((a, b) => b.newestImageTime - a.newestImageTime);
+}
+  if (sortValue === "oldest") {
+  copy.sort((a, b) => a.newestImageTime - b.newestImageTime);
+}
   return copy;
 }
 
