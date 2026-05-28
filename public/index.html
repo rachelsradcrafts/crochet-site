@@ -14,6 +14,8 @@
   </header>
 
   <script src="gallery-data.js"></script>
+  <script src="prices.js"></script>
+
   <main>
     <section class="intro">
       <h2>Available & Custom Items</h2>
@@ -124,7 +126,7 @@
         </div>
 
         <h3>${item.name}</h3>
-        <p class="price">${item.price}</p>
+        <p class="price">${window.itemPrices[item.id] || "Price coming soon"}</p>
       `;
 
       gallery.appendChild(card);
