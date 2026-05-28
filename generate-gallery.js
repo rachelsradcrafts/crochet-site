@@ -19,6 +19,26 @@ function idFromFolder(folderName) {
     .replace(/^-+|-+$/g, "");
 }
 
+function readPrice(folderPath) {
+  const priceFile = path.join(folderPath, "price.txt");
+
+  if (!fs.existsSync(priceFile)) {
+    return "Price TBD";
+  }
+
+  const price = fs.readFileSync(priceFile, "utf8").trim();
+
+  if (price.length === 0) {
+    return "Price TBD";
+  }
+
+  if (price.startsWith("$")) {
+    return price;
+  }
+
+  return "$" + price;
+}
+
 const items = fs
   .readdirSync(imagesRoot, { withFileTypes: true })
   .filter(entry => entry.isDirectory())
@@ -37,7 +57,7 @@ const items = fs
       id: idFromFolder(folder),
       name: displayNameFromFolder(folder),
       folder,
-      price: "",
+      price: readPrice(folderPath),
       images
     };
   })
