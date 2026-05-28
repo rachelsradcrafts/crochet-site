@@ -55,11 +55,22 @@ const items = fs
 const images = imageFiles
   .sort((a, b) => a.localeCompare(b, undefined, { numeric: true }));
 
-const newestImageTime = Math.max(
-  ...imageFiles.map(fileName => {
-    const filePath = path.join(folderPath, fileName);
-    return fs.statSync(filePath).mtimeMs;
-  })
+const gitLogFile = path.join(folderPath, imageFiles[0]);
+
+let newestImageTime = 0;
+
+try {
+  const { execSync } = require("child_process");
+
+  newestImageTime = Number(
+    execSync(
+      `git log -1 --format=%ct -- "${gitLogFile}"`,
+      { encoding: "utf8" }
+    ).trim()
+  );
+} catch {
+  newestImageTime = 0;
+}
 );
 
    return {
