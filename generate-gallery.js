@@ -71,7 +71,6 @@ try {
 } catch {
   newestImageTime = 0;
 }
-);
 
    return {
   id: idFromFolder(folder),
