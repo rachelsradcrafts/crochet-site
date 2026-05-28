@@ -25,6 +25,18 @@
       </p>
     </section>
 
+    <section class="sort-controls">
+  <label for="sort-select">Sort items:</label>
+
+  <select id="sort-select" onchange="buildGallery()">
+    <option value="az">A-Z</option>
+    <option value="za">Z-A</option>
+    <option value="price-low">Price: Low to High</option>
+    <option value="price-high">Price: High to Low</option>
+    <option value="newest">Newest to Oldest</option>
+  </select>
+</section>
+
     <section class="gallery" id="gallery"></section>
 
     <section class="contact">
@@ -97,40 +109,78 @@
       imagePath(item, images[galleryIndexes[itemId]]);
   }
 
-  function buildGallery() {
-    const gallery = document.getElementById("gallery");
+  function priceNumber(item) {
+  const match = item.price.match(/\d+/);
 
-    items.forEach(item => {
-      galleryIndexes[item.id] = 0;
-
-      const card = document.createElement("article");
-      card.className = "card";
-
-      const buttons =
-        item.images.length > 1
-          ? `
-            <button class="nav prev" onclick="moveSlide('${item.id}', -1)">❮</button>
-            <button class="nav next" onclick="moveSlide('${item.id}', 1)">❯</button>
-          `
-          : "";
-
-      card.innerHTML = `
-        <div class="carousel">
-          ${buttons}
-          <img
-            id="${item.id}-image"
-            src="${imagePath(item, item.images[0])}"
-            alt="${item.name}"
-          />
-        </div>
-
-        <h3>${item.name}</h3>
-        <p class="price">${item.price}</p>
-      `;
-
-      gallery.appendChild(card);
-    });
+  if (!match) {
+    return 999999;
   }
+
+  return Number(match[0]);
+}
+
+function sortedItems() {
+  const sortValue = document.getElementById("sort-select").value;
+  const copy = [...items];
+
+  if (sortValue === "az") {
+    copy.sort((a, b) => a.name.localeCompare(b.name));
+  }
+
+  if (sortValue === "za") {
+    copy.sort((a, b) => b.name.localeCompare(a.name));
+  }
+
+  if (sortValue === "price-low") {
+    copy.sort((a, b) => priceNumber(a) - priceNumber(b));
+  }
+
+  if (sortValue === "price-high") {
+    copy.sort((a, b) => priceNumber(b) - priceNumber(a));
+  }
+
+  if (sortValue === "newest") {
+    copy.reverse();
+  }
+
+  return copy;
+}
+
+function buildGallery() {
+  const gallery = document.getElementById("gallery");
+  gallery.innerHTML = "";
+
+  sortedItems().forEach(item => {
+    galleryIndexes[item.id] = 0;
+
+    const card = document.createElement("article");
+    card.className = "card";
+
+    const buttons =
+      item.images.length > 1
+        ? `
+          <button class="nav prev" onclick="moveSlide('${item.id}', -1)">❮</button>
+          <button class="nav next" onclick="moveSlide('${item.id}', 1)">❯</button>
+        `
+        : "";
+
+    card.innerHTML = `
+      <div class="carousel">
+        ${buttons}
+        <img
+          id="${item.id}-image"
+          src="${imagePath(item, item.images[0])}"
+          alt="${item.name}"
+        />
+      </div>
+
+      <h3>${item.name}</h3>
+      <p class="price">${item.price}</p>
+    `;
+
+    gallery.appendChild(card);
+  });
+}
 
   buildGallery();
 </script>

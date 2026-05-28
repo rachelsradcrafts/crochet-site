@@ -214,3 +214,28 @@ footer {
 .contact-line a {
   word-break: break-word;
 }
+.sort-controls {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+
+  background: white;
+  padding: 1rem 1.25rem;
+  border-radius: 14px;
+
+  margin-bottom: 1.5rem;
+
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.06);
+}
+
+.sort-controls label {
+  font-weight: bold;
+  color: #2f5f8f;
+}
+
+.sort-controls select {
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  border: 1px solid #9bcaca;
+  font-size: 1rem;
+}
