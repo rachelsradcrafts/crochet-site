@@ -3,13 +3,18 @@ import re
 from datetime import date
 from pathlib import Path
 
-from flask import Flask, abort, redirect, render_template, request, url_for
+from flask import Flask, abort, redirect, render_template, request, send_from_directory, url_for
 from werkzeug.utils import secure_filename
 
 
 BASE_DIR = Path(__file__).resolve().parent
 PUBLIC_DIR = BASE_DIR / "public"
-IMAGES_ROOT = PUBLIC_DIR / "images"
+
+DATA_DIR = Path(
+    os.environ.get("CROCHET_DATA_DIR", "~/crochet-data")
+).expanduser().resolve()
+
+IMAGES_ROOT = DATA_DIR / "images"
 
 ALLOWED_EXTENSIONS = {".jpg", ".jpeg", ".png", ".webp", ".gif"}
 
@@ -18,10 +23,17 @@ def create_app() -> Flask:
     app = Flask(
         __name__,
         static_folder=str(PUBLIC_DIR),
-        static_url_path="",
+        static_url_path="/static",
     )
 
     app.config["MAX_CONTENT_LENGTH"] = 50 * 1024 * 1024
+
+    DATA_DIR.mkdir(parents=True, exist_ok=True)
+    IMAGES_ROOT.mkdir(parents=True, exist_ok=True)
+
+    @app.get("/images/<path:filename>")
+    def uploaded_image(filename):
+        return send_from_directory(IMAGES_ROOT, filename)
 
     #enable_admin = os.environ.get("ENABLE_ADMIN") == "1"
     enable_admin = True
