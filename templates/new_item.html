@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Admin - Rachel's Rad Crafts</title>
+  <link rel="stylesheet" href="/styles.css" />
+</head>
+<body>
+  <header class="hero">
+    <h1>Admin</h1>
+    <p>Manage Rachel's Rad Crafts items.</p>
+  </header>
+
+  <main>
+    <section class="intro">
+      <h2>Items</h2>
+      <p><a href="/admin/new">Add new item</a></p>
+    </section>
+
+    <section class="gallery">
+      {% for item in items %}
+        <article class="card">
+          <div class="carousel">
+            <img src="/images/{{ item.folder }}/{{ item.images[0] }}" alt="{{ item.name }}" />
+          </div>
+
+          <h3>{{ item.name }}</h3>
+          <p class="price">{{ item.price }}</p>
+          <p>{{ item.sort_date }}</p>
+        </article>
+      {% endfor %}
+    </section>
+  </main>
+</body>
+</html>
